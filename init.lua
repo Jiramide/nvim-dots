@@ -46,7 +46,6 @@ vim.opt.expandtab = true
 
 -- 15 diff mode
 
-
 -- 16 mapping
 
 
@@ -67,5 +66,7 @@ vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "Go down one visual line" })
 vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Go up one visual line" })
 vim.keymap.set({ "n", "v" }, "0", "g0", { desc = "Go to the beginning of visual line" })
 vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"})
+
+vim.cmd("colorscheme habamax")
 
 require("init")
