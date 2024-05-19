@@ -12,8 +12,8 @@ vim.opt.list = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 -- dynamic based off of indenting rules.
--- @see ./
-vim.opt.listchars = { leadmultispace = "| ", trail = "_", tab = "  " }
+-- @see ./lua/core/sleuth.lua
+vim.opt.listchars = { trail = "_" }
 
 -- 5 syntax
 vim.opt.hlsearch = false
