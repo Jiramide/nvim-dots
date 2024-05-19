@@ -51,6 +51,11 @@ vim.opt.expandtab = true
 
 vim.opt.inccommand = "split"
 
+vim.g.have_nerd_font = true
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to pane below current pane" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to pane above current pane" })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to pane to the left of current pane" })
