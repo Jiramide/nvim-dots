@@ -1,12 +1,11 @@
-if vim.fn.executable("gcc") == 0 then
-  -- if there's no C compiler available, then return an empty plugin spec
-  return {}
-end
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+
+    cond = function()
+      return vim.fn.executable("gcc") ~= 0
+    end,
 
     config = function()
       require("nvim-treesitter.install").prefer_git = true
