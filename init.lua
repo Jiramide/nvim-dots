@@ -1,0 +1,71 @@
+-- 1 important
+
+-- 2 moving around
+vim.opt.smartcase = true
+
+-- 3 tags
+
+-- 4 displaying text
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 4
+vim.opt.list = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+-- dynamic based off of indenting rules.
+-- @see ./
+vim.opt.listchars = { leadmultispace = "| ", trail = "_", tab = "  " }
+
+-- 5 syntax
+vim.opt.hlsearch = false
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
+vim.opt.colorcolumn = { 80, 120 }
+
+-- 6 multiple windows
+
+-- 7 multiple tab pages
+
+-- 8 terminal
+
+-- 9 using the mouse
+
+-- 10 messages and info
+vim.opt.showmode = false
+
+-- 11 selecting text
+
+-- 12 editing text
+
+-- 13 tabs and indenting
+vim.opt.shiftwidth = 2
+vim.opt.smarttab = true
+vim.opt.shiftround = true
+vim.opt.expandtab = true
+
+-- 14 folding
+
+-- 15 diff mode
+
+
+-- 16 mapping
+
+
+vim.opt.inccommand = "split"
+
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to pane below current pane" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to pane above current pane" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to pane to the left of current pane" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to pane to the right of current pane" })
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go down half a page" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Go up half a page" })
+
+vim.keymap.set("v", ">", ">gv", { desc = "Tabulate current selection forward" })
+vim.keymap.set("v", "<", "<gv", { desc = "Tabulate current selection forward" })
+
+vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "Go down one visual line" })
+vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Go up one visual line" })
+vim.keymap.set({ "n", "v" }, "0", "g0", { desc = "Go to the beginning of visual line" })
+vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"})
+
+require("init")
