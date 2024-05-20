@@ -74,4 +74,9 @@ vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"}
 
 vim.cmd("colorscheme habamax")
 
+-- Remove background on VertSplit which ruins WinSeparator
+local vert_split_hl = vim.api.nvim_get_hl(0, { name = "VertSplit" })
+vert_split_hl.bg = nil
+vim.api.nvim_set_hl(0, "VertSplit", vert_split_hl)
+
 require("init")
