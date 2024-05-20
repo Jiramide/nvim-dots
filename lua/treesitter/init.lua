@@ -19,10 +19,10 @@ return {
             "haskell",
             "html",
             "javascript",
-            -- "latex", requires tree-sitter CLI
             "lua",
             "markdown",
             "typescript",
+            -- "latex", requires tree-sitter CLI
           },
 
           highlight = {

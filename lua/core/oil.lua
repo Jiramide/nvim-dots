@@ -9,7 +9,7 @@ return {
           columns = { "icon" },
 
           keymaps = {
-            ["gd"] = { 
+            ["gd"] = {
               desc = "Toggle detailed view",
               callback = function()
                 local oil = require("oil")
