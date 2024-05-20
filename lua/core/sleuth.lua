@@ -7,7 +7,7 @@ end
 
 local function get_tabs_listchars(shift_width)
   return {
-    leadmultispace = "__",
+    leadmultispace = "__", -- we need to set leadmultispace as opposed to lead to overwrite the listchars
     tab = "| ",
   }
 end
