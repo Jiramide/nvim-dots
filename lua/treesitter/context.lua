@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter-context",
-    deps = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
 
     config = function()
       require("treesitter-context").setup(

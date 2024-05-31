@@ -36,9 +36,13 @@ return {
           indent = {
             enable = true,
             disable = { "ruby" },
-          }
+          },
         }
       )
+
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldenable = false
     end,
   }
 }

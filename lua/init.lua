@@ -17,7 +17,7 @@ require("lazy").setup(
       { import = "core" },
 
       { import = "treesitter" },
-      { import = "cmp" },
+      { import = "completion" },
       { import = "dap" },
       { import = "lsp" },
     },
