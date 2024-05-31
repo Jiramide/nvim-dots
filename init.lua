@@ -48,7 +48,6 @@ vim.opt.expandtab = true
 
 -- 16 mapping
 
-
 vim.opt.inccommand = "split"
 
 vim.g.have_nerd_font = true
@@ -71,6 +70,13 @@ vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "Go down one visual line" })
 vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Go up one visual line" })
 vim.keymap.set({ "n", "v" }, "0", "g0", { desc = "Go to the beginning of visual line" })
 vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"})
+
+-- Execute some shell command and paste the output
+-- This has been modified a bit to use /usr/bin/env bash instead of /bin/bash, since
+-- bash is not in the /bin directory on NixOS.
+-- @see <https://www.reddit.com/r/neovim/comments/1d24sti/execute_random_commands_from_neovim/>
+vim.keymap.set("n", "<leader>xp", "yy2o<ESC>kpV:!/usr/bin/env bash<CR>")
+vim.keymap.set("v", "<leader>xp", "y'<P'<O<ESC>'>o<ESC>:<C-u>'<,'>!/usr/bin/env bash<CR>")
 
 vim.cmd("colorscheme habamax")
 
