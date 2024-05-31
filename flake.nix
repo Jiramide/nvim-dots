@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "nvim";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -20,7 +20,7 @@
         ];
 
         shellHook = ''
-          echo "working on nvim"
+          export DEV_SHELL_ACTIVE='nvim'
         '';
       };
   };
