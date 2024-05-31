@@ -1,7 +1,7 @@
 local function get_spaces_listchars(shift_width)
   return {
     tab = ">>",
-    leadmultispace = "|" .. (" "):rep(math.max(shift_width - 1, 0))
+    leadmultispace = "▏" .. (" "):rep(math.max(shift_width - 1, 0))
   }
 end
 
