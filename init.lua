@@ -85,4 +85,27 @@ local vert_split_hl = vim.api.nvim_get_hl(0, { name = "VertSplit" })
 vert_split_hl.bg = nil
 vim.api.nvim_set_hl(0, "VertSplit", vert_split_hl)
 
+local DISABLE_INSERT_LINE_ON_FT = {
+  TelescopePrompt = true,
+}
+
+vim.api.nvim_create_autocmd(
+  { "InsertEnter", "InsertLeave" },
+  {
+    group = vim.api.nvim_create_augroup("ChangeLineNumber", { clear = true }),
+    pattern = "*",
+    callback = function(ctx)
+      local event = ctx.event
+      local filetype = vim.bo[ctx.buf].filetype
+
+      if DISABLE_INSERT_LINE_ON_FT[filetype] then
+        return
+      end
+
+      -- Enable relative number when leaving insert mode
+      vim.wo.relativenumber = event == "InsertLeave"
+    end,
+  }
+)
+
 require("init")
