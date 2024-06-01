@@ -19,9 +19,7 @@
           stylua
         ];
 
-        shellHook = ''
-          export DEV_SHELL_ACTIVE='nvim'
-        '';
+        DEV_SHELL_ACTIVE = "nvim";
       };
   };
 }
