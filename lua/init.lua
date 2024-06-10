@@ -20,6 +20,8 @@ require("lazy").setup(
       { import = "completion" },
       { import = "dap" },
       { import = "lsp" },
+
+      { import = "misc" },
     },
   }
 )
