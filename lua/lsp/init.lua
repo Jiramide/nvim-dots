@@ -28,6 +28,8 @@ return {
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
           map("K", vim.lsp.buf.hover, "Hover")
           map("gD", vim.lsp.buf.declaration, "Goto declaration")
+          map("[d", vim.diagnostic.goto_prev, "Goto previous diagnostic")
+          map("]d", vim.diagnostic.goto_next, "Goto previous diagnostic")
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHightlightProvider then
