@@ -101,6 +101,14 @@ return {
       tsserver = {
 
       },
+
+      rust_analyzer = {
+
+      },
+
+      gopls = {
+
+      },
     }
 
     require("mason").setup()
