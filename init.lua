@@ -1,6 +1,7 @@
 -- 1 important
 
 -- 2 moving around
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- 3 tags
@@ -8,6 +9,7 @@ vim.opt.smartcase = true
 -- 4 displaying text
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 4
+vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.number = true
 vim.opt.relativenumber = true
