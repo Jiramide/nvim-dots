@@ -79,6 +79,11 @@ vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Go up one visual line" })
 vim.keymap.set({ "n", "v" }, "0", "g0", { desc = "Go to the beginning of visual line" })
 vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"})
 
+vim.keymap.set("n", "<A-j>", ":m+1<CR>", { desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m-2<CR>", { desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv", { desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv", { desc = "Move selection up" })
+
 -- Execute some shell command and paste the output
 -- This has been modified a bit to use /usr/bin/env bash instead of /bin/bash, since
 -- bash is not in the /bin directory on NixOS.
