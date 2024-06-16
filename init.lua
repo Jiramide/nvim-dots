@@ -50,6 +50,12 @@ vim.opt.expandtab = true
 
 -- 16 mapping
 
+-- 21 running make and jumping to errors (quickfix)
+if vim.fn.executable("rg") == 1 then
+  vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+  vim.opt.grepformat:append("%f:%l:%c:%m")
+end
+
 vim.opt.inccommand = "split"
 
 vim.g.have_nerd_font = true
