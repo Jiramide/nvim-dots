@@ -18,14 +18,19 @@ return {
             vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
           end
 
-          map("gd", vim.lsp.buf.definition, "Goto definitions")
-          map("gr", vim.lsp.buf.references, "Goto references")
-          map("gI", vim.lsp.buf.implementation, "Goto implementation")
-          map("<leader>D", vim.lsp.buf.type_definition, "Goto type definition")
-          map("<leader>ds", vim.lsp.buf.document_symbol, "Document symbols")
-          map("<leader>ws", vim.lsp.buf.workspace_symbol, "Workspace symbols")
+          local builtin = require("telescope.builtin")
+
+          map("gd", builtin.lsp_definitions, "Goto definitions")
+          map("gr", builtin.lsp_references, "Goto references")
+          map("gI", builtin.lsp_implementations, "Goto implementation")
+          map("<leader>D", builtin.lsp_type_definitions, "Goto type definition")
+          map("<leader>ds", builtin.lsp_document_symbols, "Document symbols")
+          map("<leader>ws", builtin.lsp_workspace_symbols, "Workspace symbols")
           map("<leader>rn", vim.lsp.buf.rename, "Rename")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+          map("<leader>oc", builtin.lsp_outgoing_calls, "Outgoing calls")
+          map("<leader>ic", builtin.lsp_incoming_calls, "Incoming calls")
+
           map("K", vim.lsp.buf.hover, "Hover")
           map("gD", vim.lsp.buf.declaration, "Goto declaration")
           map("[d", vim.diagnostic.goto_prev, "Goto previous diagnostic")
