@@ -24,6 +24,7 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = { 80, 120 }
 
 -- 6 multiple windows
+vim.opt.statuscolumn = "%!v:lua.require(\"statuscolumn\")()"
 
 -- 7 multiple tab pages
 
