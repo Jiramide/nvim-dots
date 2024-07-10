@@ -114,6 +114,10 @@ return {
       gopls = {
 
       },
+
+      clangd = {
+
+      },
     }
 
     require("mason").setup()
