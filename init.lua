@@ -8,7 +8,7 @@ vim.opt.smartcase = true
 
 -- 4 displaying text
 vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 4
+-- vim.opt.sidescrolloff = 4
 vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.number = true
@@ -24,7 +24,7 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = { 80, 120 }
 
 -- 6 multiple windows
-vim.opt.statuscolumn = "%!v:lua.require(\"statuscolumn\")()"
+vim.opt.statuscolumn = "%!v:lua.require(\"statuscolumn\").build()"
 
 -- 7 multiple tab pages
 
@@ -38,6 +38,7 @@ vim.opt.showmode = false
 -- 11 selecting text
 
 -- 12 editing text
+vim.opt.undofile = true
 
 -- 13 tabs and indenting
 vim.opt.shiftwidth = 2
@@ -46,6 +47,8 @@ vim.opt.shiftround = true
 vim.opt.expandtab = true
 
 -- 14 folding
+-- vim.opt.foldtext = ""
+vim.opt.foldlevelstart = 2
 
 -- 15 diff mode
 
