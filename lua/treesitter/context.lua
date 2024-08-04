@@ -4,16 +4,14 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
 
     config = function()
-      require("treesitter-context").setup(
-        {
-          enable = false,
-          max_lines = 0,
-        }
-      )
+      require("treesitter-context").setup({
+        enable = false,
+        max_lines = 0,
+      })
 
       vim.keymap.set("n", "[c", function()
         require("treesitter-context").go_to_context(vim.v.count1)
       end)
     end,
-  }
+  },
 }

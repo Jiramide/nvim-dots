@@ -10,7 +10,6 @@ return {
 
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
       vim.keymap.set("n", "<leader>rg", builtin.live_grep, { desc = "Live grep" })
-    end
-
-  }
+    end,
+  },
 }

@@ -16,5 +16,5 @@ return {
     opts = {
       -- configuration goes here
     },
-  }
+  },
 }

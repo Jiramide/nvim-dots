@@ -1,7 +1,7 @@
 local function get_spaces_listchars(shift_width)
   return {
     tab = ">>",
-    leadmultispace = "▏" .. (" "):rep(math.max(shift_width - 1, 0))
+    leadmultispace = "▏" .. (" "):rep(math.max(shift_width - 1, 0)),
   }
 end
 
@@ -22,24 +22,17 @@ local function set_listchars(event)
 
   local listchars_producer = expand_tab and get_spaces_listchars or get_tabs_listchars
 
-  opts.listchars = vim.tbl_deep_extend(
-    "force",
-    old_listchars,
-    listchars_producer(shift_width)
-  )
+  opts.listchars = vim.tbl_deep_extend("force", old_listchars, listchars_producer(shift_width))
 end
 
-vim.api.nvim_create_autocmd(
-  "OptionSet",
-  {
-    group = vim.api.nvim_create_augroup("ChangeListChars", { clear = true }),
-    pattern = { "expandtab", "shiftwidth" },
-    callback = set_listchars,
-  }
-)
+vim.api.nvim_create_autocmd("OptionSet", {
+  group = vim.api.nvim_create_augroup("ChangeListChars", { clear = true }),
+  pattern = { "expandtab", "shiftwidth" },
+  callback = set_listchars,
+})
 
 return {
   {
     "tpope/vim-sleuth",
-  }
+  },
 }

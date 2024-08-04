@@ -24,7 +24,7 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = { 80, 120 }
 
 -- 6 multiple windows
-vim.opt.statuscolumn = "%!v:lua.require(\"statuscolumn\").build()"
+vim.opt.statuscolumn = '%!v:lua.require("statuscolumn").build()'
 
 -- 7 multiple tab pages
 
@@ -81,7 +81,7 @@ vim.keymap.set("v", "<", "<gv", { desc = "Tabulate current selection forward" })
 vim.keymap.set({ "n", "v" }, "j", "gj", { desc = "Go down one visual line" })
 vim.keymap.set({ "n", "v" }, "k", "gk", { desc = "Go up one visual line" })
 vim.keymap.set({ "n", "v" }, "0", "g0", { desc = "Go to the beginning of visual line" })
-vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line"})
+vim.keymap.set({ "n", "v" }, "$", "g$", { desc = "Go to the end of visual line" })
 
 vim.keymap.set("n", "<A-j>", ":m+1<CR>", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m-2<CR>", { desc = "Move line up" })
@@ -106,23 +106,20 @@ local DISABLE_INSERT_LINE_ON_FT = {
   TelescopePrompt = true,
 }
 
-vim.api.nvim_create_autocmd(
-  { "InsertEnter", "InsertLeave" },
-  {
-    group = vim.api.nvim_create_augroup("ChangeLineNumber", { clear = true }),
-    pattern = "*",
-    callback = function(ctx)
-      local event = ctx.event
-      local filetype = vim.bo[ctx.buf].filetype
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
+  group = vim.api.nvim_create_augroup("ChangeLineNumber", { clear = true }),
+  pattern = "*",
+  callback = function(ctx)
+    local event = ctx.event
+    local filetype = vim.bo[ctx.buf].filetype
 
-      if DISABLE_INSERT_LINE_ON_FT[filetype] then
-        return
-      end
+    if DISABLE_INSERT_LINE_ON_FT[filetype] then
+      return
+    end
 
-      -- Enable relative number when leaving insert mode
-      vim.wo.relativenumber = event == "InsertLeave"
-    end,
-  }
-)
+    -- Enable relative number when leaving insert mode
+    vim.wo.relativenumber = event == "InsertLeave"
+  end,
+})
 
 require("init")

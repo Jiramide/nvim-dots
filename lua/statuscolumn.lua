@@ -59,7 +59,7 @@ local function normal_mode_line_number()
     return line
   end
 
-  return "%=%{" ..relative_line .. "}"
+  return "%=%{" .. relative_line .. "}"
 end
 
 local function line_number()
@@ -73,7 +73,7 @@ local function line_number()
 end
 
 function _G.fold_click_handler()
-    local line = vim.fn.getmousepos().line
+  local line = vim.fn.getmousepos().line
 
   if not is_fold_start(line) then
     return
