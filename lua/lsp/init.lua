@@ -31,7 +31,7 @@ return {
         map("]d", vim.diagnostic.goto_next, "Goto previous diagnostic")
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.server_capabilities.documentHightlightProvider then
+        if client and client.server_capabilities.documentHighlightProvider then
           local highlight_augroup = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
 
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -57,72 +57,187 @@ return {
 
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
           map("<leader>th", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
           end, "Toggle inlay hints")
+
+          -- default inlay hints to show
+          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
         end
+
+        vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
       end,
     })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+    -- Add folding capabilities
+    capabilities = vim.tbl_deep_extend("force", capabilities, {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
+    })
+
     local servers = {
       lua_ls = {
+        capabilities = capabilities,
         settings = {
           Lua = {
             completion = {
               callSnippet = "Replace",
             },
-          },
 
-          diagnostics = {
-            disable = {
-              -- "missing-fields",
+            diagnostics = {
+              disable = {
+                -- "missing-fields",
+              },
+            },
+
+            hint = {
+              enable = true,
+              setType = true,
             },
           },
         },
       },
 
-      tsserver = {},
+      tsserver = {
+        capabilities = capabilities,
+        completions = {
+          completeFunctionCalls = true,
+        },
 
-      rust_analyzer = {},
+        settings = {
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
 
-      gopls = {
-        gofumpt = true,
-        codelenses = {
-          gc_details = false,
-          generate = true,
-          regenerate_cgo = true,
-          run_govulncheck = true,
-          test = true,
-          tidy = true,
-          upgrade_dependency = true,
-          vendor = true,
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterHintsWhenArgumentMatchesName = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
         },
-        hints = {
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          compositeLiteralTypes = true,
-          constantValues = true,
-          functionTypeParameters = true,
-          parameterNames = true,
-          rangeVariableTypes = true,
-        },
-        analyses = {
-          fieldalignment = true,
-          nilness = true,
-          unusedparams = true,
-          unusedwrite = true,
-          useany = true,
-        },
-        usePlaceholders = true,
-        completeUnimported = true,
-        staticcheck = true,
-        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-        semanticTokens = true,
       },
 
-      clangd = {},
+      rust_analyzer = {
+        capabilities = capabilities,
+        settings = {
+          ["rust-analyzer"] = {},
+        },
+      },
+
+      gopls = {
+        capabilities = capabilities,
+        settings = {
+          gopls = {
+            gofumpt = true,
+            codelenses = {
+              gc_details = false,
+              generate = true,
+              regenerate_cgo = true,
+              run_govulncheck = true,
+              test = true,
+              tidy = true,
+              upgrade_dependency = true,
+              vendor = true,
+            },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              fieldalignment = true,
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+            usePlaceholders = true,
+            completeUnimported = true,
+            staticcheck = true,
+            directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+            semanticTokens = true,
+          },
+        },
+      },
+
+      clangd = {
+        capabilities = capabilities,
+      },
+
+      nil_ls = {
+        capabilities = capabilities,
+      },
+
+      hls = {
+        capabilities = capabilities,
+        filetypes = { "haskell", "lhaskell", "cabal" },
+      },
+
+      texlab = {
+        capabilities = capabilities,
+      },
+
+      --[[
+      textlsp = {
+        capabilities = capabilities,
+        settings = {
+          analysers = {
+            ollama = {
+              enabled = true,
+              check_text = {
+                on_open = false,
+                on_save = true,
+                on_change = false,
+              },
+              model = "phi3:medium",
+              max_token = 5000,
+            },
+          },
+
+          documents = {
+            language = "auto:en",
+
+            org = {
+              org_todo_keywords = {
+                "TODO",
+                "IN_PROGRESS",
+                "DONE",
+              },
+            },
+
+            txt = {
+              parse = true,
+            },
+          },
+        },
+      },
+      --]]
+
+      racket_langserver = {
+        capabilities = capabilities,
+      },
     }
 
     for server_name, config in pairs(servers) do
