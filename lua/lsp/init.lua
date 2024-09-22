@@ -132,6 +132,11 @@ return {
               includeInlayEnumMemberValueHints = true,
             },
           },
+
+          implicitProjectConfiguration = {
+            checkJs = true,
+            strictNullChecks = true,
+          },
         },
       },
 
@@ -236,6 +241,10 @@ return {
       --]]
 
       racket_langserver = {
+        capabilities = capabilities,
+      },
+
+      glsl_analyzer = {
         capabilities = capabilities,
       },
     }
