@@ -1,5 +1,9 @@
 local statuscolumn = {}
 
+local function foldexpr(line)
+  return tostring(vim.treesitter.foldexpr(line))
+end
+
 local function is_in_fold(line)
   return vim.fn.foldlevel(line) ~= 0
 end
@@ -9,8 +13,7 @@ local function is_fold_start(line)
     return false
   end
 
-  return vim.treesitter.foldexpr(line):sub(1, 1) == ">"
-    and vim.treesitter.foldexpr(line + 1) ~= vim.treesitter.foldexpr(line)
+  return foldexpr(line):sub(1, 1) == ">" and foldexpr(line + 1) ~= vim.treesitter.foldexpr(line)
 end
 
 local function is_fold_end(line)
@@ -18,8 +21,8 @@ local function is_fold_end(line)
     return false
   end
 
-  local next = vim.treesitter.foldexpr(line + 1)
-  local curr = vim.treesitter.foldexpr(line)
+  local next = foldexpr(line + 1)
+  local curr = foldexpr(line)
 
   if curr == "=" then
     return false
@@ -208,6 +211,8 @@ end
 function statuscolumn.build()
   return table.concat({
     "%@v:lua.fold_click_handler@",
+    " ",
+    "%s",
     fold_column(),
     " ",
     line_number(),
